@@ -28,7 +28,7 @@
     background: var(--white);
     color: var(--ink);
     overflow-x: hidden;
-    cursor: none;
+    cursor: auto;
   }
 
   /* Custom Cursor */
@@ -50,147 +50,202 @@
   nav {
     position: fixed; top: 0; left: 0; right: 0;
     display: flex; justify-content: space-between; align-items: center;
-    padding: 24px 60px; z-index: 100;
-    background: rgba(255,255,255,0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--green-line);
+    padding: 24px 80px; z-index: 100;
+    background: rgba(17,28,23,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
   }
   .nav-logo {
     font-family: 'Space Mono', monospace;
     font-size: 11px; letter-spacing: 0.18em;
-    color: var(--green); text-transform: uppercase;
+    color: var(--green-light); text-transform: uppercase;
   }
   .nav-links { display: flex; gap: 36px; list-style: none; }
   .nav-links a {
-    font-size: 13px; color: var(--grey);
+    font-size: 13px; color: rgba(255,255,255,0.5);
     text-decoration: none; letter-spacing: 0.04em;
     font-weight: 400; transition: color 0.25s;
   }
-  .nav-links a:hover { color: var(--green); }
+  .nav-links a:hover { color: var(--green-light); }
 
   /* HERO */
   .hero {
     min-height: 100vh;
-    display: grid; grid-template-columns: 1fr 1fr;
-    background: var(--white); position: relative; overflow: hidden;
+    background: var(--ink);
+    position: relative; overflow: hidden;
+    display: flex; flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 0 80px 0;
   }
-  /* Green geometric accent */
+
+  /* Background big name watermark */
+  .hero-bg-text {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(120px, 16vw, 220px);
+    font-weight: 700;
+    color: rgba(255,255,255,0.03);
+    white-space: nowrap;
+    pointer-events: none;
+    letter-spacing: -4px;
+    z-index: 0;
+    user-select: none;
+  }
+
+  /* Green accent bar top */
+  .hero-topbar {
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(to right, var(--green), var(--green-light), transparent);
+  }
+
+  /* Dot grid background */
   .hero::before {
     content: '';
-    position: absolute; top: 0; right: 0;
-    width: 42%; height: 100%;
-    background: var(--green-pale);
-    clip-path: polygon(12% 0, 100% 0, 100% 100%, 0% 100%);
+    position: absolute; inset: 0;
+    background-image: radial-gradient(circle, rgba(76,175,120,0.12) 1px, transparent 1px);
+    background-size: 36px 36px;
     z-index: 0;
   }
 
-  .hero-left {
-    display: flex; flex-direction: column; justify-content: center;
-    padding: 140px 60px 80px; position: relative; z-index: 2;
+  /* Green glow blob */
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(26,92,56,0.35) 0%, transparent 70%);
+    z-index: 0;
+    pointer-events: none;
   }
+
+  .hero-inner {
+    position: relative; z-index: 2;
+    padding: 0 80px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: flex-end;
+    gap: 60px;
+  }
+
+  .hero-left { max-width: 780px; }
+
   .hero-tag {
     font-family: 'Space Mono', monospace;
-    font-size: 11px; letter-spacing: 0.22em;
-    color: var(--green-mid); text-transform: uppercase;
-    margin-bottom: 28px;
-    
-    display: flex; align-items: center; gap: 12px;
+    font-size: 11px; letter-spacing: 0.25em;
+    color: var(--green-light); text-transform: uppercase;
+    margin-bottom: 32px;
+    display: flex; align-items: center; gap: 14px;
   }
   .hero-tag::before {
-    content: ''; width: 28px; height: 1px; background: var(--green-mid);
+    content: ''; width: 32px; height: 1px; background: var(--green-light);
   }
+
   .hero-name {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(52px, 5.5vw, 82px);
-    line-height: 1.02; color: var(--ink);
-    margin-bottom: 8px;
-    
+    font-size: clamp(64px, 8vw, 120px);
+    line-height: 0.95;
+    color: var(--white);
+    margin-bottom: 0;
+    display: block;
+    letter-spacing: -2px;
   }
   .hero-name-sub {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(52px, 5.5vw, 82px);
-    font-style: italic; line-height: 1.02;
-    color: var(--green); margin-bottom: 36px;
-    
-  }
-  .hero-desc {
-    font-size: 15px; line-height: 1.8; color: var(--grey);
-    max-width: 400px; font-weight: 300;
+    font-size: clamp(64px, 8vw, 120px);
+    font-style: italic;
+    line-height: 0.95;
+    color: var(--green-light);
     margin-bottom: 48px;
-    
+    display: block;
+    letter-spacing: -2px;
   }
+
+  .hero-bottom-row {
+    display: flex; align-items: flex-end; gap: 48px;
+    flex-wrap: wrap;
+  }
+
+  .hero-desc {
+    font-size: 16px; line-height: 1.75; color: rgba(255,255,255,0.55);
+    max-width: 460px; font-weight: 300;
+    border-left: 2px solid var(--green);
+    padding-left: 20px;
+  }
+
   .hero-cta {
-    display: flex; gap: 14px;
-    
+    display: flex; gap: 14px; flex-shrink: 0;
   }
+
   .btn-primary {
     display: inline-flex; align-items: center; gap: 10px;
-    background: var(--green); color: var(--white);
-    padding: 14px 30px; font-size: 13px; font-weight: 500;
+    background: var(--green-light); color: var(--ink);
+    padding: 16px 32px; font-size: 13px; font-weight: 600;
     letter-spacing: 0.06em; text-decoration: none;
     transition: background 0.3s, transform 0.2s;
   }
-  .btn-primary:hover { background: var(--green-mid); transform: translateY(-2px); }
+  .btn-primary:hover { background: var(--white); transform: translateY(-2px); }
+
   .btn-outline {
     display: inline-flex; align-items: center; gap: 10px;
-    border: 1.5px solid var(--green); color: var(--green);
-    padding: 14px 30px; font-size: 13px; font-weight: 500;
+    border: 1px solid rgba(255,255,255,0.25); color: rgba(255,255,255,0.7);
+    padding: 16px 32px; font-size: 13px; font-weight: 400;
     letter-spacing: 0.06em; text-decoration: none;
     transition: all 0.3s;
   }
-  .btn-outline:hover { background: var(--green); color: var(--white); transform: translateY(-2px); }
+  .btn-outline:hover { border-color: var(--green-light); color: var(--green-light); transform: translateY(-2px); }
 
-  .hero-right {
-    display: flex; align-items: center; justify-content: center;
-    padding: 140px 60px 80px 20px; position: relative; z-index: 2;
+  /* Hero right — pill stats */
+  .hero-stats {
+    display: flex; flex-direction: column; gap: 12px;
+    padding-bottom: 4px;
   }
-  .hero-card-wrap { position: relative; width: 300px; }
-  .hero-card-main {
-    background: var(--white);
-    border: 1px solid var(--green-line);
-    padding: 36px;
-    box-shadow: 0 12px 48px rgba(26,92,56,0.08);
-    
+  .hero-stat-pill {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 14px 20px;
+    display: flex; align-items: center; gap: 14px;
+    backdrop-filter: blur(8px);
+    transition: background 0.3s, border-color 0.3s;
+    min-width: 220px;
   }
-  .avatar {
-    width: 64px; height: 64px;
-    background: var(--green);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
+  .hero-stat-pill:hover {
+    background: rgba(76,175,120,0.1);
+    border-color: var(--green-light);
+  }
+  .hsp-num {
     font-family: 'Playfair Display', serif;
-    font-size: 22px; color: var(--white);
-    margin-bottom: 24px;
+    font-size: 24px; color: var(--green-light);
+    line-height: 1; min-width: 52px;
   }
-  .card-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 18px; color: var(--ink); margin-bottom: 4px;
+  .hsp-label {
+    font-size: 11px; color: rgba(255,255,255,0.45);
+    letter-spacing: 0.08em; text-transform: uppercase;
+    line-height: 1.4;
   }
-  .card-role {
-    font-size: 11px; color: var(--green-mid);
+
+  /* Scroll indicator */
+  .hero-scroll {
+    position: absolute; bottom: 32px; left: 50%;
+    transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    z-index: 2;
+  }
+  .hero-scroll span {
     font-family: 'Space Mono', monospace;
-    letter-spacing: 0.12em; margin-bottom: 28px;
+    font-size: 9px; letter-spacing: 0.2em;
+    color: rgba(255,255,255,0.25); text-transform: uppercase;
   }
-  .card-divider {
-    height: 1px; background: var(--green-line); margin-bottom: 24px;
+  .scroll-dot {
+    width: 1px; height: 48px;
+    background: linear-gradient(to bottom, var(--green-light), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
   }
-  .card-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .cs-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 30px; color: var(--green); line-height: 1;
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 1; } 50% { opacity: 0.2; }
   }
-  .cs-label {
-    font-size: 10px; color: var(--grey-light);
-    letter-spacing: 0.1em; text-transform: uppercase; margin-top: 4px;
-  }
-  .hero-badge {
-    position: absolute; bottom: -20px; right: -24px;
-    background: var(--green); color: var(--white);
-    padding: 18px 22px;
-    animation: floatBadge 3.5s ease-in-out infinite;
-    
-  }
-  .badge-label { font-size: 9px; letter-spacing: 0.18em; opacity: 0.7; text-transform: uppercase; }
-  .badge-val { font-family: 'Playfair Display', serif; font-size: 20px; margin-top: 4px; }
 
   /* METRICS STRIP */
   .metrics {
@@ -551,51 +606,31 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-left">
-    <div class="hero-tag">Digital Marketing Specialist · Bali, Indonesia</div>
-    <h1 class="hero-name">Arimbawa</h1>
-    <h1 class="hero-name-sub">Putra</h1>
-    <p class="hero-desc">
-      Performance-first marketer who builds campaigns grounded in data and driven by 
-      creative penetration. From audience research to ad execution — I scale what works 
-      and cut what doesn't. SEO and AI search are the long game that compounds it all.
-    </p>
-    <div class="hero-cta">
-      <a href="/cdn-cgi/l/email-protection#96f7e4fffbf4f7e1f7e6e3e2e4f7a7a1d6f1fbf7fffab8f5f9fb" class="btn-primary">Get In Touch ↗</a>
-      <a href="#process" class="btn-outline">See My Process</a>
-    </div>
-  </div>
-  <div class="hero-right">
-    <div class="hero-card-wrap">
-      <div class="hero-card-main">
-        <div class="avatar">AP</div>
-        <div class="card-name">Arimbawa Putra</div>
-        <div class="card-role">DIGITAL MARKETING SPECIALIST</div>
-        <div class="card-divider"></div>
-        <div class="card-stats">
-          <div>
-            <div class="cs-num">4×</div>
-            <div class="cs-label">Booking Growth</div>
-          </div>
-          <div>
-            <div class="cs-num">Meta</div>
-            <div class="cs-label">Expert Level</div>
-          </div>
-          <div>
-            <div class="cs-num">3+</div>
-            <div class="cs-label">Years Active</div>
-          </div>
-          <div>
-            <div class="cs-num">SGO</div>
-            <div class="cs-label">AI Search Pioneer</div>
-          </div>
+  <div class="hero-topbar"></div>
+  <div class="hero-bg-text">ARIMBAWA</div>
+
+  <div class="hero-inner" style="grid-template-columns: 1fr;">
+    <div class="hero-left">
+      <div class="hero-tag">Digital Marketing Specialist · Bali, Indonesia</div>
+      <span class="hero-name">Arimbawa</span>
+      <span class="hero-name-sub">Putra</span>
+      <div class="hero-bottom-row">
+        <p class="hero-desc">
+          Performance-first marketer who builds campaigns grounded in data and driven by 
+          creative penetration. I scale what works and cut what doesn't — 
+          SEO and AI search are the long game that compounds it all.
+        </p>
+        <div class="hero-cta">
+          <a href="mailto:arimbawaputra17@gmail.com" class="btn-primary">Get In Touch ↗</a>
+          <a href="#process" class="btn-outline">See My Process</a>
         </div>
       </div>
-      <div class="hero-badge">
-        <div class="badge-label">Current Focus</div>
-        <div class="badge-val">Meta + SEO</div>
-      </div>
     </div>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="scroll-dot"></div>
+    <span>Scroll</span>
   </div>
 </section>
 
@@ -689,6 +724,34 @@
     </div>
   </div>
 
+  <!-- UGC + AUTOMATION — full width highlight -->
+  <div class="process-detail-grid" style="grid-template-columns: 1fr 1fr; margin-bottom: 2px;">
+    <div class="pd-card" style="border-left: 3px solid var(--green);">
+      <span class="pd-icon">🎬</span>
+      <h4>UGC for Performance Marketing</h4>
+      <p>User-Generated Content is one of the highest-converting ad formats today — and I use it strategically. UGC ads lower CPM, build instant trust, and outperform polished brand creatives in almost every test. I source, brief, and deploy UGC directly into paid campaign funnels to dramatically boost ROAS and reduce creative fatigue.</p>
+      <div class="pd-tags">
+        <span class="pd-tag">UGC Ads</span>
+        <span class="pd-tag">Trust Signals</span>
+        <span class="pd-tag">Social Proof</span>
+        <span class="pd-tag">Creative Fatigue Prevention</span>
+        <span class="pd-tag">High-ROAS Formats</span>
+      </div>
+    </div>
+    <div class="pd-card" style="border-left: 3px solid var(--green);">
+      <span class="pd-icon">🤖</span>
+      <h4>Automated UGC Workflow — n8n</h4>
+      <p>I've built a custom automation pipeline using <strong>n8n</strong> to streamline the entire UGC production cycle — from creator outreach and content collection to approval, formatting, and ad deployment. What used to take days now runs automatically. This workflow multiplies creative output without multiplying workload, keeping campaigns fresh and conversion rates high.</p>
+      <div class="pd-tags">
+        <span class="pd-tag">n8n Automation</span>
+        <span class="pd-tag">UGC Pipeline</span>
+        <span class="pd-tag">Workflow Automation</span>
+        <span class="pd-tag">Creator Outreach</span>
+        <span class="pd-tag">Scalable Creative</span>
+      </div>
+    </div>
+  </div>
+
   <!-- ANALYTICS + SEO/AI — 2 supporting cards -->
   <div class="process-detail-grid">
     <div class="pd-card">
@@ -727,8 +790,8 @@
     </div>
     <div class="exp-card">
       <div class="exp-card-num">02</div>
-      <h3>Creative Penetration</h3>
-      <p>Data-backed creative strategy — structured hook testing, format experiments, and messaging angles. I find what breaks through the noise and scale it without hesitation.</p>
+      <h3>UGC & Creative Penetration</h3>
+      <p>UGC is the highest-trust, highest-converting format in performance marketing today. I build structured UGC strategies and have automated the entire production pipeline using <strong>n8n</strong> — from creator briefing to ad deployment, running at scale without manual bottlenecks.</p>
     </div>
     <div class="exp-card">
       <div class="exp-card-num">03</div>
@@ -787,10 +850,10 @@
       <ul class="ach-list">
         <li>Scaled direct bookings by <strong>4× in 2025</strong> through a performance-first integrated strategy — Meta Ads, Google Ads, and SEO working in a unified conversion funnel.</li>
         <li>Built a full <strong>data-to-decision pipeline</strong> — GA4 event tracking, pixel mapping, and weekly performance dashboards enabling fast, evidence-based campaign decisions.</li>
-        <li>Executed <strong>creative penetration testing</strong> across carousel, video, and UGC formats — identifying winning hooks and scaling them aggressively for maximum ROAS.</li>
+        <li>Conceptualized and built a <strong>UGC Marketing concept from scratch</strong> — designing the full creator strategy, content framework, and brief system to produce authentic, high-converting ad content for luxury villa properties.</li>
+        <li>Built a <strong>custom n8n automation workflow</strong> to handle the entire UGC project pipeline — from creator outreach and content collection to approval, formatting, and deployment into live ad campaigns. What took days now runs automatically.</li>
         <li>Pioneered <strong>Search Generative Optimization (SGO)</strong> — structuring content and authority citations so properties rank inside Gemini, ChatGPT, and Perplexity results.</li>
-        <li>Executed full-cycle <strong>technical SEO audits</strong> — capturing high-intent organic traffic through keyword strategy and backlink building to reduce paid dependency.</li>
-        <li>Built comprehensive <strong>monthly and quarterly campaign roadmaps</strong> with clear KPIs, budget allocation models, and ROI reporting for property stakeholders.</li>
+        <li>Executed full-cycle <strong>technical SEO audits</strong> and built comprehensive <strong>quarterly campaign roadmaps</strong> with clear KPIs and ROI reporting for property stakeholders.</li>
       </ul>
     </div>
   </div>
@@ -827,11 +890,11 @@
     </div>
     <div class="sk-group reveal d4">
       <h4>Specialized</h4>
+      <span class="sk-tag">n8n Workflow Automation</span>
+      <span class="sk-tag">UGC Strategy & Production</span>
       <span class="sk-tag">AI / SGO (LLM Optimization)</span>
       <span class="sk-tag">Structured Data Schema</span>
       <span class="sk-tag">CRM Systems</span>
-      <span class="sk-tag">Data Mining</span>
-      <span class="sk-tag">System Analysis</span>
     </div>
   </div>
 </section>
@@ -905,10 +968,10 @@
       items: [
         'Scaled direct bookings by <strong>4× in 2025</strong> through a performance-first strategy — Meta Ads, Google Ads, and SEO working together in a unified conversion funnel.',
         'Built a full <strong>data-to-decision pipeline</strong> — GA4 event tracking, pixel mapping, and weekly dashboards enabling fast, evidence-based campaign decisions.',
-        'Executed <strong>creative penetration testing</strong> across carousel, video, and UGC formats — identifying winning hooks and scaling them aggressively for maximum ROAS.',
+        'Conceptualized and built a <strong>UGC Marketing concept from scratch</strong> — designing the full creator strategy, content framework, and brief system to produce authentic, high-converting ad content for luxury villa properties.',
+        'Built a <strong>custom n8n automation workflow</strong> to handle the entire UGC project pipeline — from creator outreach and content collection to approval, formatting, and deployment into live ad campaigns.',
         'Pioneered <strong>Search Generative Optimization (SGO)</strong> — structuring content and authority citations so properties surface inside Gemini, ChatGPT, and Perplexity results.',
-        'Executed full-cycle <strong>technical SEO audits</strong> — capturing high-intent organic traffic through keyword strategy and backlink building to reduce paid dependency.',
-        'Built comprehensive <strong>monthly and quarterly campaign roadmaps</strong> with clear KPIs, budget allocation models, and ROI reporting for property stakeholders.'
+        'Executed full-cycle <strong>technical SEO audits</strong> and built comprehensive <strong>quarterly campaign roadmaps</strong> with clear KPIs and ROI reporting for property stakeholders.'
       ]
     },
     {
