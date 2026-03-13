@@ -93,7 +93,7 @@
     font-size: 11px; letter-spacing: 0.22em;
     color: var(--green-mid); text-transform: uppercase;
     margin-bottom: 28px;
-    opacity: 0; animation: fadeUp 0.8s ease 0.2s forwards;
+    
     display: flex; align-items: center; gap: 12px;
   }
   .hero-tag::before {
@@ -104,24 +104,24 @@
     font-size: clamp(52px, 5.5vw, 82px);
     line-height: 1.02; color: var(--ink);
     margin-bottom: 8px;
-    opacity: 0; animation: fadeUp 0.8s ease 0.35s forwards;
+    
   }
   .hero-name-sub {
     font-family: 'Playfair Display', serif;
     font-size: clamp(52px, 5.5vw, 82px);
     font-style: italic; line-height: 1.02;
     color: var(--green); margin-bottom: 36px;
-    opacity: 0; animation: fadeUp 0.8s ease 0.5s forwards;
+    
   }
   .hero-desc {
     font-size: 15px; line-height: 1.8; color: var(--grey);
     max-width: 400px; font-weight: 300;
     margin-bottom: 48px;
-    opacity: 0; animation: fadeUp 0.8s ease 0.65s forwards;
+    
   }
   .hero-cta {
     display: flex; gap: 14px;
-    opacity: 0; animation: fadeUp 0.8s ease 0.8s forwards;
+    
   }
   .btn-primary {
     display: inline-flex; align-items: center; gap: 10px;
@@ -150,7 +150,7 @@
     border: 1px solid var(--green-line);
     padding: 36px;
     box-shadow: 0 12px 48px rgba(26,92,56,0.08);
-    opacity: 0; animation: fadeIn 1s ease 0.6s forwards;
+    
   }
   .avatar {
     width: 64px; height: 64px;
@@ -187,7 +187,7 @@
     background: var(--green); color: var(--white);
     padding: 18px 22px;
     animation: floatBadge 3.5s ease-in-out infinite;
-    opacity: 0; animation: fadeIn 1s ease 1s forwards, floatBadge 3.5s ease-in-out 1.5s infinite;
+    
   }
   .badge-label { font-size: 9px; letter-spacing: 0.18em; opacity: 0.7; text-transform: uppercase; }
   .badge-val { font-family: 'Playfair Display', serif; font-size: 20px; margin-top: 4px; }
@@ -246,7 +246,7 @@
     display: flex; flex-direction: column; align-items: center;
     text-align: center; padding: 0 12px;
     position: relative; z-index: 1;
-    opacity: 0; transform: translateY(20px);
+    opacity: 1; transform: translateY(0);
     transition: opacity 0.6s ease, transform 0.6s ease;
   }
   .process-step.visible { opacity: 1; transform: translateY(0); }
@@ -278,7 +278,7 @@
   }
   .pd-card {
     background: var(--white); padding: 40px 36px;
-    opacity: 0; transform: translateY(20px);
+    opacity: 1; transform: translateY(0);
     transition: opacity 0.6s ease, transform 0.6s ease;
   }
   .pd-card.visible { opacity: 1; transform: translateY(0); }
@@ -306,7 +306,7 @@
     background: var(--white); padding: 44px 36px;
     position: relative; overflow: hidden;
     transition: background 0.3s;
-    opacity: 0; transform: translateY(20px);
+    opacity: 1; transform: translateY(0);
     transition: opacity 0.5s ease, transform 0.5s ease, background 0.3s;
   }
   .exp-card.visible { opacity: 1; transform: translateY(0); }
@@ -340,7 +340,7 @@
   .timeline { border-left: 1px solid var(--green-line); padding-left: 32px; }
   .tl-item {
     position: relative; margin-bottom: 40px;
-    opacity: 0; transform: translateX(-16px);
+    opacity: 1; transform: translateX(0);
     transition: opacity 0.6s ease, transform 0.6s ease;
     cursor: pointer;
   }
@@ -496,10 +496,10 @@
     50% { transform: translateY(-8px); }
   }
   .reveal {
-    opacity: 0; transform: translateY(28px);
+    opacity: 1;
+    transform: translateY(0);
     transition: opacity 0.7s ease, transform 0.7s ease;
   }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
   .d1 { transition-delay: 0.1s; }
   .d2 { transition-delay: 0.2s; }
   .d3 { transition-delay: 0.3s; }
@@ -556,12 +556,12 @@
     <h1 class="hero-name">Arimbawa</h1>
     <h1 class="hero-name-sub">Putra</h1>
     <p class="hero-desc">
-      Data-driven strategist who transforms raw analytics into campaigns that scale. 
-      Specializing in performance advertising, SEO, and AI-era search optimization 
-      for hospitality brands.
+      Performance-first marketer who builds campaigns grounded in data and driven by 
+      creative penetration. From audience research to ad execution — I scale what works 
+      and cut what doesn't. SEO and AI search are the long game that compounds it all.
     </p>
     <div class="hero-cta">
-      <a href="mailto:arimbawaputra17@gmail.com" class="btn-primary">Get In Touch ↗</a>
+      <a href="/cdn-cgi/l/email-protection#96f7e4fffbf4f7e1f7e6e3e2e4f7a7a1d6f1fbf7fffab8f5f9fb" class="btn-primary">Get In Touch ↗</a>
       <a href="#process" class="btn-outline">See My Process</a>
     </div>
   </div>
@@ -578,8 +578,8 @@
             <div class="cs-label">Booking Growth</div>
           </div>
           <div>
-            <div class="cs-num">250+</div>
-            <div class="cs-label">Villas Managed</div>
+            <div class="cs-num">Meta</div>
+            <div class="cs-label">Expert Level</div>
           </div>
           <div>
             <div class="cs-num">3+</div>
@@ -606,91 +606,110 @@
     <div class="metric-label">Direct Booking Growth · 2025</div>
   </div>
   <div class="metric reveal d1">
-    <div class="metric-num">250+</div>
-    <div class="metric-label">Luxury Villas Portfolio</div>
+    <div class="metric-num">ROAS</div>
+    <div class="metric-label">Performance-First Approach</div>
   </div>
   <div class="metric reveal d2">
-    <div class="metric-num">3</div>
-    <div class="metric-label">Ad Platforms — Expert Level</div>
+    <div class="metric-num">3+</div>
+    <div class="metric-label">Ad Platforms Mastered</div>
   </div>
   <div class="metric reveal d3">
-    <div class="metric-num">SGO</div>
-    <div class="metric-label">AI Search Optimization Pioneer</div>
+    <div class="metric-num">A/B</div>
+    <div class="metric-label">Always Testing, Always Scaling</div>
   </div>
 </div>
 
 <!-- DATA-DRIVEN PROCESS -->
 <section class="process" id="process">
   <div class="section-tag reveal">How I Work</div>
-  <h2 class="section-title reveal d1">The <em>Data-Driven</em> Campaign Process</h2>
+  <h2 class="section-title reveal d1">Data-Driven. <em>Creatively Executed.</em></h2>
 
   <div class="process-flow">
     <div class="process-step">
       <div class="step-num">1</div>
-      <div class="step-title">Audit & Research</div>
-      <div class="step-desc">Deep-dive analytics review, competitor mapping, and audience intelligence gathering before a single dollar is spent.</div>
+      <div class="step-title">Data Audit</div>
+      <div class="step-desc">GA4 deep-dive, pixel analysis, and competitor mapping. I don't guess — I read the numbers first.</div>
     </div>
     <div class="process-step">
       <div class="step-num">2</div>
-      <div class="step-title">Insight Extraction</div>
-      <div class="step-desc">Transform raw data from GA4, Search Console & pixel signals into clear behavioral patterns and opportunity gaps.</div>
+      <div class="step-title">Audience Build</div>
+      <div class="step-desc">Layered segmentation from behavioral signals, lookalikes, and intent data. Right person, right moment.</div>
     </div>
     <div class="process-step">
       <div class="step-num">3</div>
-      <div class="step-title">Strategy Build</div>
-      <div class="step-desc">Craft channel-specific roadmaps with defined KPIs, budget allocation models, and creative direction grounded in data.</div>
+      <div class="step-title">Creative Penetration</div>
+      <div class="step-desc">Hook testing, format experiments, and messaging angles. Find what breaks through — then scale it hard.</div>
     </div>
     <div class="process-step">
       <div class="step-num">4</div>
-      <div class="step-title">Execute & Test</div>
-      <div class="step-desc">Launch structured A/B tests across ads, landing pages, and content. Every variable is intentional and measurable.</div>
+      <div class="step-title">Launch & Test</div>
+      <div class="step-desc">Structured A/B tests across ad sets, creatives, and landing pages. Every variable tracked and intentional.</div>
     </div>
     <div class="process-step">
       <div class="step-num">5</div>
-      <div class="step-title">Optimize & Report</div>
-      <div class="step-desc">Continuous performance loops: real-time adjustments, ROAS tracking, and transparent ROI reporting to stakeholders.</div>
+      <div class="step-title">Scale & Report</div>
+      <div class="step-desc">Kill what underperforms, scale what converts. Clear ROAS reporting delivered to stakeholders every cycle.</div>
     </div>
   </div>
 
-  <div class="process-detail-grid">
+  <!-- CAMPAIGN DEEP DIVE — 3 big cards (performance & creative) -->
+  <div class="process-detail-grid" style="grid-template-columns: 1fr 1fr 1fr; margin-bottom: 2px;">
     <div class="pd-card">
-      <span class="pd-icon">🔬</span>
+      <span class="pd-icon">🎯</span>
+      <h4>Performance Campaign Strategy</h4>
+      <p>I architect full-funnel paid campaigns — from cold awareness to retargeting close. Budget allocation, bid strategy, and audience layering are all driven by data signals, not gut feel. Meta and Google Ads are my primary weapons.</p>
+      <div class="pd-tags">
+        <span class="pd-tag">Meta Ads</span>
+        <span class="pd-tag">Google Ads</span>
+        <span class="pd-tag">Funnel Architecture</span>
+        <span class="pd-tag">Budget Modeling</span>
+      </div>
+    </div>
+    <div class="pd-card">
+      <span class="pd-icon">⚡</span>
+      <h4>Creative Penetration</h4>
+      <p>Creative is where data meets instinct. I run structured creative matrices — testing hooks, visual formats (carousel, video, UGC, static), and CTA angles simultaneously. Winners get budgeted up fast. Losers get cut faster.</p>
+      <div class="pd-tags">
+        <span class="pd-tag">Hook Testing</span>
+        <span class="pd-tag">Video Storytelling</span>
+        <span class="pd-tag">Carousel Ads</span>
+        <span class="pd-tag">UGC Strategy</span>
+      </div>
+    </div>
+    <div class="pd-card">
+      <span class="pd-icon">👥</span>
       <h4>Audience Intelligence</h4>
-      <p>I build layered audience profiles from pixel behavior, lookalike modeling, and search intent data — ensuring campaigns speak to the right person at the right moment in the buyer journey.</p>
+      <p>I build layered audience profiles from pixel behavior, search intent, and lookalike modeling. Understanding who converts — and why — is the foundation every campaign is built on before a single ad goes live.</p>
       <div class="pd-tags">
         <span class="pd-tag">Pixel Tracking</span>
         <span class="pd-tag">Lookalike Audiences</span>
         <span class="pd-tag">Intent Mapping</span>
+        <span class="pd-tag">Retargeting</span>
       </div>
     </div>
+  </div>
+
+  <!-- ANALYTICS + SEO/AI — 2 supporting cards -->
+  <div class="process-detail-grid">
     <div class="pd-card">
-      <span class="pd-icon">📐</span>
-      <h4>Creative Testing Framework</h4>
-      <p>Each campaign runs a structured creative matrix — testing hooks, formats (carousel, video, static), and CTAs simultaneously. Winners are scaled, losers are killed fast. No guesswork.</p>
+      <span class="pd-icon">📈</span>
+      <h4>Analytics & Full-Funnel Attribution</h4>
+      <p>Every click, scroll, and conversion is mapped through GA4 event tracking and UTM architecture. I translate raw data into clear performance narratives — what's working, what's wasting budget, and what to do next.</p>
       <div class="pd-tags">
-        <span class="pd-tag">A/B Testing</span>
-        <span class="pd-tag">Creative Matrix</span>
+        <span class="pd-tag">GA4</span>
+        <span class="pd-tag">UTM Architecture</span>
+        <span class="pd-tag">ROI Reporting</span>
         <span class="pd-tag">CRO</span>
       </div>
     </div>
     <div class="pd-card">
-      <span class="pd-icon">📈</span>
-      <h4>Full-Funnel Attribution</h4>
-      <p>From first touch to final conversion — I track every micro-interaction using GA4 event mapping and UTM architecture to understand true campaign contribution and allocate budget wisely.</p>
+      <span class="pd-icon">🌐</span>
+      <h4>SEO, Web & AI Search (SGO)</h4>
+      <p>The long game that amplifies everything else. Technical SEO for organic compounding, website optimization for conversion, and pioneering AI Search Optimization — ensuring brands appear as recommended answers inside Gemini, ChatGPT, and Perplexity.</p>
       <div class="pd-tags">
-        <span class="pd-tag">GA4</span>
-        <span class="pd-tag">UTM Architecture</span>
-        <span class="pd-tag">Attribution</span>
-      </div>
-    </div>
-    <div class="pd-card">
-      <span class="pd-icon">🤖</span>
-      <h4>AI Search Optimization (SGO)</h4>
-      <p>I engineer content and structured data so that AI platforms — Gemini, ChatGPT, Perplexity — surface my clients' brands as recommended answers. A frontier skill redefining discoverability.</p>
-      <div class="pd-tags">
-        <span class="pd-tag">Structured Data</span>
-        <span class="pd-tag">LLM Citation</span>
-        <span class="pd-tag">Authority Building</span>
+        <span class="pd-tag">Technical SEO</span>
+        <span class="pd-tag">SGO / LLM Optimization</span>
+        <span class="pd-tag">Web Optimization</span>
       </div>
     </div>
   </div>
@@ -703,33 +722,33 @@
   <div class="exp-cards">
     <div class="exp-card">
       <div class="exp-card-num">01</div>
-      <h3>Performance Advertising</h3>
-      <p>Expert-level Meta & Google Ads — from funnel architecture and budget modeling to conversion-led creative and video storytelling for high-value properties.</p>
+      <h3>Performance Campaign</h3>
+      <p>Full-funnel Meta & Google Ads from cold traffic to conversion. Precision targeting, aggressive budget optimization, and ROAS-first thinking on every campaign I run.</p>
     </div>
     <div class="exp-card">
       <div class="exp-card-num">02</div>
-      <h3>Technical SEO</h3>
-      <p>Full-cycle audits, keyword research, backlink strategy, and on-page optimization engineered to capture high-intent organic traffic and reduce paid dependency.</p>
+      <h3>Creative Penetration</h3>
+      <p>Data-backed creative strategy — structured hook testing, format experiments, and messaging angles. I find what breaks through the noise and scale it without hesitation.</p>
     </div>
     <div class="exp-card">
       <div class="exp-card-num">03</div>
-      <h3>AI Search (SGO)</h3>
-      <p>Pioneering the next frontier of search — ensuring brands are cited and recommended by AI platforms through structured data, authority citations, and LLM-optimized content.</p>
+      <h3>Audience & Data Intelligence</h3>
+      <p>Layered audience segmentation built from pixel signals, behavioral data, and lookalike modeling. Every campaign starts with knowing exactly who we're targeting and why.</p>
     </div>
     <div class="exp-card">
       <div class="exp-card-num">04</div>
-      <h3>Analytics & Reporting</h3>
-      <p>GA4 dashboards, ROI analysis, and transparent stakeholder reporting that turns performance numbers into clear strategic narratives and next-step decisions.</p>
+      <h3>Analytics & ROI Reporting</h3>
+      <p>GA4 event mapping, UTM architecture, and full attribution modeling. I turn complex performance data into clear stakeholder reports and sharper next-move decisions.</p>
     </div>
     <div class="exp-card">
       <div class="exp-card-num">05</div>
-      <h3>Web & E-Commerce Optimization</h3>
-      <p>UI/UX enhancements, Shopify CMS management, and site speed optimization that convert visitors into customers — tested, measured, and iterated for maximum conversion.</p>
+      <h3>SEO & Web Optimization</h3>
+      <p>Technical SEO audits, keyword strategy, and website conversion improvements that build organic compounding traffic — the long game working alongside paid campaigns.</p>
     </div>
     <div class="exp-card">
       <div class="exp-card-num">06</div>
-      <h3>Hospitality Campaign Strategy</h3>
-      <p>Deep domain expertise in Bali's luxury villa market — seasonal campaign planning, direct booking growth strategy, and brand storytelling that resonates with high-value guests.</p>
+      <h3>AI Search (SGO)</h3>
+      <p>Structuring content and authority citations so brands surface as recommended answers inside Gemini, ChatGPT, and Perplexity — the next frontier of discoverability.</p>
     </div>
   </div>
 </section>
@@ -764,14 +783,14 @@
 
     <div class="exp-detail-box" id="expDetailBox">
       <div class="edb-company">House of Reservations</div>
-      <span class="edb-tag">VILLA MANAGEMENT · LUXURY HOSPITALITY · BALI</span>
+      <span class="edb-tag">PERFORMANCE MARKETING · HOSPITALITY · BALI</span>
       <ul class="ach-list">
-        <li>Scaled direct bookings by <strong>4× in 2025</strong> through a data-backed integrated strategy spanning SEO architecture, Meta Ads performance campaigns, and UI/UX conversion improvements.</li>
-        <li>Built a full <strong>data-to-decision pipeline</strong> — from GA4 event tracking and pixel mapping to weekly performance dashboards and quarterly ROI reports for 250+ villa owners.</li>
+        <li>Scaled direct bookings by <strong>4× in 2025</strong> through a performance-first integrated strategy — Meta Ads, Google Ads, and SEO working in a unified conversion funnel.</li>
+        <li>Built a full <strong>data-to-decision pipeline</strong> — GA4 event tracking, pixel mapping, and weekly performance dashboards enabling fast, evidence-based campaign decisions.</li>
+        <li>Executed <strong>creative penetration testing</strong> across carousel, video, and UGC formats — identifying winning hooks and scaling them aggressively for maximum ROAS.</li>
         <li>Pioneered <strong>Search Generative Optimization (SGO)</strong> — structuring content and authority citations so properties rank inside Gemini, ChatGPT, and Perplexity results.</li>
-        <li>Designed conversion-led <strong>Meta & Google Ads campaigns</strong> using carousel and video storytelling formats, continuously A/B tested against audience segments for maximum ROAS.</li>
-        <li>Executed full-cycle <strong>technical SEO audits</strong> — reducing OTA dependency by capturing high-intent organic traffic through keyword strategy, backlink building, and on-page precision.</li>
-        <li>Built and managed comprehensive <strong>monthly and quarterly campaign roadmaps</strong> aligned to Bali's seasonal tourism demand cycles.</li>
+        <li>Executed full-cycle <strong>technical SEO audits</strong> — capturing high-intent organic traffic through keyword strategy and backlink building to reduce paid dependency.</li>
+        <li>Built comprehensive <strong>monthly and quarterly campaign roadmaps</strong> with clear KPIs, budget allocation models, and ROI reporting for property stakeholders.</li>
       </ul>
     </div>
   </div>
@@ -825,9 +844,9 @@
     <div class="reveal">
       <p>Looking for a digital marketing partner who blends technical rigor with creative instinct? I bring a full data-to-campaign pipeline — built on real results in Bali's competitive hospitality market.</p>
       <div class="c-links">
-        <a href="mailto:arimbawaputra17@gmail.com" class="c-link">
+        <a href="/cdn-cgi/l/email-protection#6203100b0f000315031217161003535522050f030b0e4c010d0f" class="c-link">
           <div class="c-icon">✉</div>
-          arimbawaputra17@gmail.com
+          <span class="__cf_email__" data-cfemail="6706150e0a050610061712131506565027000a060e0b4904080a">[email&#160;protected]</span>
         </a>
         <a href="tel:+6281907317445" class="c-link">
           <div class="c-icon">☏</div>
@@ -842,7 +861,7 @@
     <div class="contact-cta reveal d2">
       <h3>Let's build something <em>remarkable</em></h3>
       <p>From data strategy to campaign execution — I turn insights into bookings, traffic into revenue, and brands into market leaders.</p>
-      <a href="mailto:arimbawaputra17@gmail.com" class="btn-white">Start a Conversation ↗</a>
+      <a href="/cdn-cgi/l/email-protection#d3b2a1babeb1b2a4b2a3a6a7a1b2e2e493b4beb2babffdb0bcbe" class="btn-white">Start a Conversation ↗</a>
     </div>
   </div>
 </section>
@@ -852,7 +871,7 @@
   <p>Bali, <span>Indonesia</span></p>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // Cursor
   const cursor = document.getElementById('cursor');
   const ring = document.getElementById('cursorRing');
@@ -882,14 +901,14 @@
   const expData = [
     {
       company: 'House of Reservations',
-      tag: 'VILLA MANAGEMENT · LUXURY HOSPITALITY · BALI',
+      tag: 'PERFORMANCE MARKETING · HOSPITALITY · BALI',
       items: [
-        'Scaled direct bookings by <strong>4× in 2025</strong> through a data-backed integrated strategy spanning SEO architecture, Meta Ads performance campaigns, and UI/UX conversion improvements.',
-        'Built a full <strong>data-to-decision pipeline</strong> — from GA4 event tracking and pixel mapping to weekly performance dashboards and quarterly ROI reports for 250+ villa owners.',
-        'Pioneered <strong>Search Generative Optimization (SGO)</strong> — structuring content and authority citations so properties rank inside Gemini, ChatGPT, and Perplexity results.',
-        'Designed conversion-led <strong>Meta & Google Ads campaigns</strong> using carousel and video storytelling formats, continuously A/B tested against audience segments for maximum ROAS.',
-        'Executed full-cycle <strong>technical SEO audits</strong> — reducing dependency on third-party platforms by capturing high-intent organic traffic through keyword strategy and backlink building.',
-        'Built comprehensive <strong>monthly and quarterly campaign roadmaps</strong> aligned to Bali\'s seasonal tourism demand cycles.'
+        'Scaled direct bookings by <strong>4× in 2025</strong> through a performance-first strategy — Meta Ads, Google Ads, and SEO working together in a unified conversion funnel.',
+        'Built a full <strong>data-to-decision pipeline</strong> — GA4 event tracking, pixel mapping, and weekly dashboards enabling fast, evidence-based campaign decisions.',
+        'Executed <strong>creative penetration testing</strong> across carousel, video, and UGC formats — identifying winning hooks and scaling them aggressively for maximum ROAS.',
+        'Pioneered <strong>Search Generative Optimization (SGO)</strong> — structuring content and authority citations so properties surface inside Gemini, ChatGPT, and Perplexity results.',
+        'Executed full-cycle <strong>technical SEO audits</strong> — capturing high-intent organic traffic through keyword strategy and backlink building to reduce paid dependency.',
+        'Built comprehensive <strong>monthly and quarterly campaign roadmaps</strong> with clear KPIs, budget allocation models, and ROI reporting for property stakeholders.'
       ]
     },
     {
@@ -926,16 +945,4 @@
   const box = document.getElementById('expDetailBox');
   document.querySelectorAll('.tl-item').forEach((item, i) => {
     item.addEventListener('click', () => {
-      document.querySelectorAll('.tl-item').forEach(t => t.classList.remove('active'));
-      item.classList.add('active');
-      const d = expData[i];
-      box.innerHTML = `
-        <div class="edb-company">${d.company}</div>
-        <span class="edb-tag">${d.tag}</span>
-        <ul class="ach-list">${d.items.map(it => `<li>${it}</li>`).join('')}</ul>
-      `;
-    });
-  });
-</script>
-</body>
-</html>
+      document.querySelectorAll('.tl-item').forEach(t
