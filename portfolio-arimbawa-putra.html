@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arimbawa Putra — Digital Marketing Specialist</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --white:       #FFFFFF;
+    --off-white:   #F7FAF7;
+    --green:       #1A5C38;
+    --green-mid:   #2E7D52;
+    --green-light: #4CAF78;
+    --green-pale:  #E8F5EE;
+    --green-line:  #C8E6D4;
+    --ink:         #111C17;
+    --grey:        #5A7068;
+    --grey-light:  #9BB5A8;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--white);
+    color: var(--ink);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom Cursor */
+  .cursor {
+    position: fixed; width: 8px; height: 8px;
+    background: var(--green-light); border-radius: 50%;
+    pointer-events: none; z-index: 9999;
+    transition: transform 0.1s ease;
+  }
+  .cursor-ring {
+    position: fixed; width: 30px; height: 30px;
+    border: 1.5px solid var(--green);
+    border-radius: 50%; pointer-events: none; z-index: 9998;
+    transition: width 0.3s, height 0.3s, opacity 0.3s;
+  }
+  .cursor-ring.hovered { width: 48px; height: 48px; opacity: 0.4; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 24px 60px; z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--green-line);
+  }
+  .nav-logo {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px; letter-spacing: 0.18em;
+    color: var(--green); text-transform: uppercase;
+  }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    font-size: 13px; color: var(--grey);
+    text-decoration: none; letter-spacing: 0.04em;
+    font-weight: 400; transition: color 0.25s;
+  }
+  .nav-links a:hover { color: var(--green); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    background: var(--white); position: relative; overflow: hidden;
+  }
+  /* Green geometric accent */
+  .hero::before {
+    content: '';
+    position: absolute; top: 0; right: 0;
+    width: 42%; height: 100%;
+    background: var(--green-pale);
+    clip-path: polygon(12% 0, 100% 0, 100% 100%, 0% 100%);
+    z-index: 0;
+  }
+
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 140px 60px 80px; position: relative; z-index: 2;
+  }
+  .hero-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px; letter-spacing: 0.22em;
+    color: var(--green-mid); text-transform: uppercase;
+    margin-bottom: 28px;
+    opacity: 0; animation: fadeUp 0.8s ease 0.2s forwards;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .hero-tag::before {
+    content: ''; width: 28px; height: 1px; background: var(--green-mid);
+  }
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(52px, 5.5vw, 82px);
+    line-height: 1.02; color: var(--ink);
+    margin-bottom: 8px;
+    opacity: 0; animation: fadeUp 0.8s ease 0.35s forwards;
+  }
+  .hero-name-sub {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(52px, 5.5vw, 82px);
+    font-style: italic; line-height: 1.02;
+    color: var(--green); margin-bottom: 36px;
+    opacity: 0; animation: fadeUp 0.8s ease 0.5s forwards;
+  }
+  .hero-desc {
+    font-size: 15px; line-height: 1.8; color: var(--grey);
+    max-width: 400px; font-weight: 300;
+    margin-bottom: 48px;
+    opacity: 0; animation: fadeUp 0.8s ease 0.65s forwards;
+  }
+  .hero-cta {
+    display: flex; gap: 14px;
+    opacity: 0; animation: fadeUp 0.8s ease 0.8s forwards;
+  }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--green); color: var(--white);
+    padding: 14px 30px; font-size: 13px; font-weight: 500;
+    letter-spacing: 0.06em; text-decoration: none;
+    transition: background 0.3s, transform 0.2s;
+  }
+  .btn-primary:hover { background: var(--green-mid); transform: translateY(-2px); }
+  .btn-outline {
+    display: inline-flex; align-items: center; gap: 10px;
+    border: 1.5px solid var(--green); color: var(--green);
+    padding: 14px 30px; font-size: 13px; font-weight: 500;
+    letter-spacing: 0.06em; text-decoration: none;
+    transition: all 0.3s;
+  }
+  .btn-outline:hover { background: var(--green); color: var(--white); transform: translateY(-2px); }
+
+  .hero-right {
+    display: flex; align-items: center; justify-content: center;
+    padding: 140px 60px 80px 20px; position: relative; z-index: 2;
+  }
+  .hero-card-wrap { position: relative; width: 300px; }
+  .hero-card-main {
+    background: var(--white);
+    border: 1px solid var(--green-line);
+    padding: 36px;
+    box-shadow: 0 12px 48px rgba(26,92,56,0.08);
+    opacity: 0; animation: fadeIn 1s ease 0.6s forwards;
+  }
+  .avatar {
+    width: 64px; height: 64px;
+    background: var(--green);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; color: var(--white);
+    margin-bottom: 24px;
+  }
+  .card-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px; color: var(--ink); margin-bottom: 4px;
+  }
+  .card-role {
+    font-size: 11px; color: var(--green-mid);
+    font-family: 'Space Mono', monospace;
+    letter-spacing: 0.12em; margin-bottom: 28px;
+  }
+  .card-divider {
+    height: 1px; background: var(--green-line); margin-bottom: 24px;
+  }
+  .card-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .cs-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px; color: var(--green); line-height: 1;
+  }
+  .cs-label {
+    font-size: 10px; color: var(--grey-light);
+    letter-spacing: 0.1em; text-transform: uppercase; margin-top: 4px;
+  }
+  .hero-badge {
+    position: absolute; bottom: -20px; right: -24px;
+    background: var(--green); color: var(--white);
+    padding: 18px 22px;
+    animation: floatBadge 3.5s ease-in-out infinite;
+    opacity: 0; animation: fadeIn 1s ease 1s forwards, floatBadge 3.5s ease-in-out 1.5s infinite;
+  }
+  .badge-label { font-size: 9px; letter-spacing: 0.18em; opacity: 0.7; text-transform: uppercase; }
+  .badge-val { font-family: 'Playfair Display', serif; font-size: 20px; margin-top: 4px; }
+
+  /* METRICS STRIP */
+  .metrics {
+    background: var(--green);
+    display: flex; padding: 0 60px;
+  }
+  .metric {
+    flex: 1; padding: 40px 0;
+    border-right: 1px solid rgba(255,255,255,0.12);
+    text-align: center;
+  }
+  .metric:last-child { border-right: none; }
+  .metric-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 40px; color: var(--white);
+  }
+  .metric-label {
+    font-size: 10px; color: rgba(255,255,255,0.55);
+    letter-spacing: 0.15em; text-transform: uppercase; margin-top: 6px;
+  }
+
+  /* SECTIONS */
+  section { padding: 100px 60px; }
+  .section-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px; letter-spacing: 0.2em;
+    color: var(--green-mid); text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-tag::before { content: ''; width: 28px; height: 1px; background: var(--green-mid); }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(34px, 3.5vw, 52px);
+    line-height: 1.12; color: var(--ink);
+    max-width: 580px; margin-bottom: 64px;
+  }
+  .section-title em { font-style: italic; color: var(--green); }
+
+  /* DATA DRIVEN PROCESS */
+  .process { background: var(--off-white); }
+  .process-flow {
+    display: grid; grid-template-columns: repeat(5, 1fr);
+    gap: 0; position: relative; margin-bottom: 64px;
+  }
+  .process-flow::before {
+    content: '';
+    position: absolute;
+    top: 36px; left: 10%; right: 10%;
+    height: 1px; background: var(--green-line); z-index: 0;
+  }
+  .process-step {
+    display: flex; flex-direction: column; align-items: center;
+    text-align: center; padding: 0 12px;
+    position: relative; z-index: 1;
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .process-step.visible { opacity: 1; transform: translateY(0); }
+  .step-num {
+    width: 72px; height: 72px;
+    background: var(--white);
+    border: 2px solid var(--green-line);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; color: var(--green);
+    margin-bottom: 20px;
+    transition: background 0.3s, border-color 0.3s;
+  }
+  .process-step:hover .step-num {
+    background: var(--green); border-color: var(--green); color: var(--white);
+  }
+  .step-title {
+    font-size: 13px; font-weight: 600; color: var(--ink);
+    margin-bottom: 8px; letter-spacing: 0.02em;
+  }
+  .step-desc {
+    font-size: 12px; color: var(--grey); line-height: 1.6; font-weight: 300;
+  }
+
+  .process-detail-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+    background: var(--green-line);
+  }
+  .pd-card {
+    background: var(--white); padding: 40px 36px;
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .pd-card.visible { opacity: 1; transform: translateY(0); }
+  .pd-icon { font-size: 28px; margin-bottom: 16px; display: block; }
+  .pd-card h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px; color: var(--ink); margin-bottom: 10px;
+  }
+  .pd-card p { font-size: 13px; color: var(--grey); line-height: 1.7; font-weight: 300; }
+  .pd-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+  .pd-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px; letter-spacing: 0.1em;
+    color: var(--green-mid); border: 1px solid var(--green-line);
+    padding: 4px 8px; text-transform: uppercase;
+  }
+
+  /* EXPERTISE */
+  .expertise { background: var(--white); }
+  .exp-cards {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+    background: var(--green-line);
+  }
+  .exp-card {
+    background: var(--white); padding: 44px 36px;
+    position: relative; overflow: hidden;
+    transition: background 0.3s;
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease, background 0.3s;
+  }
+  .exp-card.visible { opacity: 1; transform: translateY(0); }
+  .exp-card::after {
+    content: ''; position: absolute; left: 0; bottom: 0;
+    height: 2px; width: 0; background: var(--green);
+    transition: width 0.4s ease;
+  }
+  .exp-card:hover { background: var(--green-pale); }
+  .exp-card:hover::after { width: 100%; }
+  .exp-card-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px; color: var(--green-line);
+    position: absolute; top: 20px; right: 24px;
+    line-height: 1; transition: color 0.3s;
+  }
+  .exp-card:hover .exp-card-num { color: var(--green-light); }
+  .exp-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; color: var(--ink); margin-bottom: 12px;
+    position: relative;
+  }
+  .exp-card p {
+    font-size: 13px; color: var(--grey); line-height: 1.7;
+    font-weight: 300; position: relative;
+  }
+
+  /* EXPERIENCE */
+  .experience { background: var(--green-pale); }
+  .exp-layout { display: grid; grid-template-columns: 280px 1fr; gap: 64px; }
+  .timeline { border-left: 1px solid var(--green-line); padding-left: 32px; }
+  .tl-item {
+    position: relative; margin-bottom: 40px;
+    opacity: 0; transform: translateX(-16px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    cursor: pointer;
+  }
+  .tl-item.visible { opacity: 1; transform: translateX(0); }
+  .tl-item::before {
+    content: ''; position: absolute;
+    left: -37px; top: 7px;
+    width: 9px; height: 9px;
+    background: var(--green-line); border-radius: 50%;
+    border: 2px solid var(--green-pale);
+    transition: background 0.3s;
+  }
+  .tl-item.active::before, .tl-item:hover::before { background: var(--green); }
+  .tl-period {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px; letter-spacing: 0.18em;
+    color: var(--green-mid); text-transform: uppercase; margin-bottom: 6px;
+  }
+  .tl-co {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px; color: var(--ink); margin-bottom: 2px;
+  }
+  .tl-role { font-size: 12px; color: var(--grey); font-weight: 300; }
+
+  .exp-detail-box {
+    background: var(--white); border: 1px solid var(--green-line);
+    padding: 48px;
+  }
+  .edb-company {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px; color: var(--ink); margin-bottom: 6px;
+  }
+  .edb-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px; letter-spacing: 0.15em; color: var(--green-mid);
+    margin-bottom: 32px; display: block;
+  }
+  .ach-list { list-style: none; }
+  .ach-list li {
+    padding: 16px 0; border-bottom: 1px solid var(--green-line);
+    font-size: 14px; line-height: 1.75; color: var(--ink);
+    font-weight: 300; display: block;
+    padding-left: 24px; position: relative;
+  }
+  .ach-list li:last-child { border-bottom: none; }
+  .ach-list li::before {
+    content: '→'; color: var(--green);
+    position: absolute; left: 0; top: 16px;
+    line-height: 1.75;
+  }
+  .ach-list li strong { font-weight: 600; color: var(--ink); }
+
+  /* SKILLS */
+  .skills { background: var(--green); }
+  .skills .section-tag { color: rgba(255,255,255,0.5); }
+  .skills .section-tag::before { background: rgba(255,255,255,0.4); }
+  .skills .section-title { color: var(--white); }
+  .skills .section-title em { color: #7DCFA0; }
+  .skills-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; }
+  .sk-group h4 {
+    font-family: 'Space Mono', monospace; font-size: 9px;
+    letter-spacing: 0.2em; color: rgba(255,255,255,0.4);
+    text-transform: uppercase; margin-bottom: 18px;
+  }
+  .sk-tag {
+    display: block; padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    font-size: 13px; color: rgba(255,255,255,0.75);
+    font-weight: 300;
+    transition: color 0.25s, padding-left 0.25s;
+  }
+  .sk-tag:hover { color: #7DCFA0; padding-left: 8px; }
+
+  /* CONTACT */
+  .contact { background: var(--white); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+  .contact-info p {
+    font-size: 15px; line-height: 1.85; color: var(--grey);
+    font-weight: 300; margin-bottom: 40px;
+  }
+  .c-links { display: flex; flex-direction: column; gap: 0; }
+  .c-link {
+    display: flex; align-items: center; gap: 16px;
+    text-decoration: none; color: var(--ink);
+    padding: 18px 0; border-bottom: 1px solid var(--green-line);
+    font-size: 14px; font-weight: 400;
+    transition: color 0.3s, gap 0.3s;
+  }
+  .c-link:hover { color: var(--green); gap: 24px; }
+  .c-icon {
+    width: 38px; height: 38px; background: var(--green-pale);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; flex-shrink: 0;
+    transition: background 0.3s;
+  }
+  .c-link:hover .c-icon { background: var(--green); }
+
+  .contact-cta {
+    background: var(--green); padding: 52px;
+    position: relative; overflow: hidden;
+  }
+  .contact-cta::before {
+    content: '';
+    position: absolute; top: -80px; right: -80px;
+    width: 220px; height: 220px;
+    border-radius: 50%; border: 1px solid rgba(255,255,255,0.08);
+  }
+  .contact-cta::after {
+    content: '';
+    position: absolute; bottom: -50px; left: -50px;
+    width: 160px; height: 160px;
+    border-radius: 50%; border: 1px solid rgba(255,255,255,0.08);
+  }
+  .contact-cta h3 {
+    font-family: 'Playfair Display', serif; font-size: 32px;
+    color: var(--white); margin-bottom: 14px; position: relative; z-index: 1;
+  }
+  .contact-cta h3 em { font-style: italic; color: #7DCFA0; }
+  .contact-cta p {
+    font-size: 14px; color: rgba(255,255,255,0.55);
+    font-weight: 300; line-height: 1.7;
+    margin-bottom: 32px; position: relative; z-index: 1;
+  }
+  .contact-cta .btn-white {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--white); color: var(--green);
+    padding: 14px 28px; font-size: 13px; font-weight: 600;
+    letter-spacing: 0.06em; text-decoration: none;
+    position: relative; z-index: 1;
+    transition: background 0.3s, transform 0.2s;
+  }
+  .contact-cta .btn-white:hover { background: var(--off-white); transform: translateY(-2px); }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink); padding: 28px 60px;
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid #1a2e22;
+  }
+  footer p { font-size: 11px; color: #3a5040; font-family: 'Space Mono', monospace; }
+  footer p span { color: var(--green-light); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; } to { opacity: 1; }
+  }
+  @keyframes floatBadge {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  .reveal {
+    opacity: 0; transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .d1 { transition-delay: 0.1s; }
+  .d2 { transition-delay: 0.2s; }
+  .d3 { transition-delay: 0.3s; }
+  .d4 { transition-delay: 0.4s; }
+  .d5 { transition-delay: 0.5s; }
+
+  /* RESPONSIVE */
+  @media (max-width: 1024px) {
+    nav { padding: 18px 32px; }
+    .hero { grid-template-columns: 1fr; }
+    .hero::before { display: none; }
+    .hero-left { padding: 120px 32px 60px; }
+    .hero-right { display: none; }
+    section { padding: 80px 32px; }
+    .process-flow { grid-template-columns: repeat(3, 1fr); }
+    .process-flow::before { display: none; }
+    .exp-cards { grid-template-columns: 1fr 1fr; }
+    .exp-layout { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: repeat(2, 1fr); }
+    .contact-grid { grid-template-columns: 1fr; }
+    .metrics { flex-wrap: wrap; padding: 0 32px; }
+    .process-detail-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 8px; padding: 20px 32px; }
+  }
+  @media (max-width: 640px) {
+    .exp-cards { grid-template-columns: 1fr; }
+    .process-flow { grid-template-columns: 1fr 1fr; }
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+    .nav-links { display: none; }
+    .metric { min-width: 50%; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Arimbawa Putra</div>
+  <ul class="nav-links">
+    <li><a href="#process">Process</a></li>
+    <li><a href="#expertise">Expertise</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Digital Marketing Specialist · Bali, Indonesia</div>
+    <h1 class="hero-name">Arimbawa</h1>
+    <h1 class="hero-name-sub">Putra</h1>
+    <p class="hero-desc">
+      Data-driven strategist who transforms raw analytics into campaigns that scale. 
+      Specializing in performance advertising, SEO, and AI-era search optimization 
+      for hospitality brands.
+    </p>
+    <div class="hero-cta">
+      <a href="mailto:arimbawaputra17@gmail.com" class="btn-primary">Get In Touch ↗</a>
+      <a href="#process" class="btn-outline">See My Process</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-card-wrap">
+      <div class="hero-card-main">
+        <div class="avatar">AP</div>
+        <div class="card-name">Arimbawa Putra</div>
+        <div class="card-role">DIGITAL MARKETING SPECIALIST</div>
+        <div class="card-divider"></div>
+        <div class="card-stats">
+          <div>
+            <div class="cs-num">4×</div>
+            <div class="cs-label">Booking Growth</div>
+          </div>
+          <div>
+            <div class="cs-num">250+</div>
+            <div class="cs-label">Villas Managed</div>
+          </div>
+          <div>
+            <div class="cs-num">3+</div>
+            <div class="cs-label">Years Active</div>
+          </div>
+          <div>
+            <div class="cs-num">SGO</div>
+            <div class="cs-label">AI Search Pioneer</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-badge">
+        <div class="badge-label">Current Focus</div>
+        <div class="badge-val">Meta + SEO</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- METRICS -->
+<div class="metrics">
+  <div class="metric reveal">
+    <div class="metric-num">4×</div>
+    <div class="metric-label">Direct Booking Growth · 2025</div>
+  </div>
+  <div class="metric reveal d1">
+    <div class="metric-num">250+</div>
+    <div class="metric-label">Luxury Villas Portfolio</div>
+  </div>
+  <div class="metric reveal d2">
+    <div class="metric-num">3</div>
+    <div class="metric-label">Ad Platforms — Expert Level</div>
+  </div>
+  <div class="metric reveal d3">
+    <div class="metric-num">SGO</div>
+    <div class="metric-label">AI Search Optimization Pioneer</div>
+  </div>
+</div>
+
+<!-- DATA-DRIVEN PROCESS -->
+<section class="process" id="process">
+  <div class="section-tag reveal">How I Work</div>
+  <h2 class="section-title reveal d1">The <em>Data-Driven</em> Campaign Process</h2>
+
+  <div class="process-flow">
+    <div class="process-step">
+      <div class="step-num">1</div>
+      <div class="step-title">Audit & Research</div>
+      <div class="step-desc">Deep-dive analytics review, competitor mapping, and audience intelligence gathering before a single dollar is spent.</div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">2</div>
+      <div class="step-title">Insight Extraction</div>
+      <div class="step-desc">Transform raw data from GA4, Search Console & pixel signals into clear behavioral patterns and opportunity gaps.</div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">3</div>
+      <div class="step-title">Strategy Build</div>
+      <div class="step-desc">Craft channel-specific roadmaps with defined KPIs, budget allocation models, and creative direction grounded in data.</div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">4</div>
+      <div class="step-title">Execute & Test</div>
+      <div class="step-desc">Launch structured A/B tests across ads, landing pages, and content. Every variable is intentional and measurable.</div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">5</div>
+      <div class="step-title">Optimize & Report</div>
+      <div class="step-desc">Continuous performance loops: real-time adjustments, ROAS tracking, and transparent ROI reporting to stakeholders.</div>
+    </div>
+  </div>
+
+  <div class="process-detail-grid">
+    <div class="pd-card">
+      <span class="pd-icon">🔬</span>
+      <h4>Audience Intelligence</h4>
+      <p>I build layered audience profiles from pixel behavior, lookalike modeling, and search intent data — ensuring campaigns speak to the right person at the right moment in the buyer journey.</p>
+      <div class="pd-tags">
+        <span class="pd-tag">Pixel Tracking</span>
+        <span class="pd-tag">Lookalike Audiences</span>
+        <span class="pd-tag">Intent Mapping</span>
+      </div>
+    </div>
+    <div class="pd-card">
+      <span class="pd-icon">📐</span>
+      <h4>Creative Testing Framework</h4>
+      <p>Each campaign runs a structured creative matrix — testing hooks, formats (carousel, video, static), and CTAs simultaneously. Winners are scaled, losers are killed fast. No guesswork.</p>
+      <div class="pd-tags">
+        <span class="pd-tag">A/B Testing</span>
+        <span class="pd-tag">Creative Matrix</span>
+        <span class="pd-tag">CRO</span>
+      </div>
+    </div>
+    <div class="pd-card">
+      <span class="pd-icon">📈</span>
+      <h4>Full-Funnel Attribution</h4>
+      <p>From first touch to final conversion — I track every micro-interaction using GA4 event mapping and UTM architecture to understand true campaign contribution and allocate budget wisely.</p>
+      <div class="pd-tags">
+        <span class="pd-tag">GA4</span>
+        <span class="pd-tag">UTM Architecture</span>
+        <span class="pd-tag">Attribution</span>
+      </div>
+    </div>
+    <div class="pd-card">
+      <span class="pd-icon">🤖</span>
+      <h4>AI Search Optimization (SGO)</h4>
+      <p>I engineer content and structured data so that AI platforms — Gemini, ChatGPT, Perplexity — surface my clients' brands as recommended answers. A frontier skill redefining discoverability.</p>
+      <div class="pd-tags">
+        <span class="pd-tag">Structured Data</span>
+        <span class="pd-tag">LLM Citation</span>
+        <span class="pd-tag">Authority Building</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERTISE -->
+<section class="expertise" id="expertise">
+  <div class="section-tag reveal">Core Services</div>
+  <h2 class="section-title reveal d1">Where I Create <em>Impact</em></h2>
+  <div class="exp-cards">
+    <div class="exp-card">
+      <div class="exp-card-num">01</div>
+      <h3>Performance Advertising</h3>
+      <p>Expert-level Meta & Google Ads — from funnel architecture and budget modeling to conversion-led creative and video storytelling for high-value properties.</p>
+    </div>
+    <div class="exp-card">
+      <div class="exp-card-num">02</div>
+      <h3>Technical SEO</h3>
+      <p>Full-cycle audits, keyword research, backlink strategy, and on-page optimization engineered to capture high-intent organic traffic and reduce paid dependency.</p>
+    </div>
+    <div class="exp-card">
+      <div class="exp-card-num">03</div>
+      <h3>AI Search (SGO)</h3>
+      <p>Pioneering the next frontier of search — ensuring brands are cited and recommended by AI platforms through structured data, authority citations, and LLM-optimized content.</p>
+    </div>
+    <div class="exp-card">
+      <div class="exp-card-num">04</div>
+      <h3>Analytics & Reporting</h3>
+      <p>GA4 dashboards, ROI analysis, and transparent stakeholder reporting that turns performance numbers into clear strategic narratives and next-step decisions.</p>
+    </div>
+    <div class="exp-card">
+      <div class="exp-card-num">05</div>
+      <h3>Web & E-Commerce Optimization</h3>
+      <p>UI/UX enhancements, Shopify CMS management, and site speed optimization that convert visitors into customers — tested, measured, and iterated for maximum conversion.</p>
+    </div>
+    <div class="exp-card">
+      <div class="exp-card-num">06</div>
+      <h3>Hospitality Campaign Strategy</h3>
+      <p>Deep domain expertise in Bali's luxury villa market — seasonal campaign planning, direct booking growth strategy, and brand storytelling that resonates with high-value guests.</p>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="experience" id="experience">
+  <div class="section-tag reveal">Career</div>
+  <h2 class="section-title reveal d1">Built on <em>Real Results</em></h2>
+  <div class="exp-layout">
+    <div class="timeline">
+      <div class="tl-item active reveal" data-index="0">
+        <div class="tl-period">Nov 2024 – Present</div>
+        <div class="tl-co">House of Reservations</div>
+        <div class="tl-role">Digital Marketing Specialist</div>
+      </div>
+      <div class="tl-item reveal d1" data-index="1">
+        <div class="tl-period">May – Oct 2024</div>
+        <div class="tl-co">Juicebox.id Agency</div>
+        <div class="tl-role">Digital Marketing Analyst · SEO Focus</div>
+      </div>
+      <div class="tl-item reveal d2" data-index="2">
+        <div class="tl-period">June 2023 – April 2024</div>
+        <div class="tl-co">PT. LYKIN · ICELAB BALI</div>
+        <div class="tl-role">Digital Marketing Specialist</div>
+      </div>
+      <div class="tl-item reveal d3" data-index="3">
+        <div class="tl-period">2018 – 2023</div>
+        <div class="tl-co">Udayana University</div>
+        <div class="tl-role">Bachelor of Computer Science · GPA 3.36</div>
+      </div>
+    </div>
+
+    <div class="exp-detail-box" id="expDetailBox">
+      <div class="edb-company">House of Reservations</div>
+      <span class="edb-tag">VILLA MANAGEMENT · LUXURY HOSPITALITY · BALI</span>
+      <ul class="ach-list">
+        <li>Scaled direct bookings by <strong>4× in 2025</strong> through a data-backed integrated strategy spanning SEO architecture, Meta Ads performance campaigns, and UI/UX conversion improvements.</li>
+        <li>Built a full <strong>data-to-decision pipeline</strong> — from GA4 event tracking and pixel mapping to weekly performance dashboards and quarterly ROI reports for 250+ villa owners.</li>
+        <li>Pioneered <strong>Search Generative Optimization (SGO)</strong> — structuring content and authority citations so properties rank inside Gemini, ChatGPT, and Perplexity results.</li>
+        <li>Designed conversion-led <strong>Meta & Google Ads campaigns</strong> using carousel and video storytelling formats, continuously A/B tested against audience segments for maximum ROAS.</li>
+        <li>Executed full-cycle <strong>technical SEO audits</strong> — reducing OTA dependency by capturing high-intent organic traffic through keyword strategy, backlink building, and on-page precision.</li>
+        <li>Built and managed comprehensive <strong>monthly and quarterly campaign roadmaps</strong> aligned to Bali's seasonal tourism demand cycles.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="skills" id="skills">
+  <div class="section-tag reveal">Technical Arsenal</div>
+  <h2 class="section-title reveal d1">Tools of <em>Precision</em></h2>
+  <div class="skills-grid">
+    <div class="sk-group reveal d1">
+      <h4>Paid Advertising</h4>
+      <span class="sk-tag">Meta Ads (Expert)</span>
+      <span class="sk-tag">Google Ads (Expert)</span>
+      <span class="sk-tag">TikTok Ads</span>
+      <span class="sk-tag">Campaign Strategy</span>
+      <span class="sk-tag">Creative Direction</span>
+    </div>
+    <div class="sk-group reveal d2">
+      <h4>SEO & Analytics</h4>
+      <span class="sk-tag">Technical SEO</span>
+      <span class="sk-tag">Backlink Strategy</span>
+      <span class="sk-tag">SEMrush / Ahrefs</span>
+      <span class="sk-tag">Google Analytics 4</span>
+      <span class="sk-tag">Search Console</span>
+    </div>
+    <div class="sk-group reveal d3">
+      <h4>Web & Platforms</h4>
+      <span class="sk-tag">Shopify CMS</span>
+      <span class="sk-tag">WordPress</span>
+      <span class="sk-tag">UI/UX Design</span>
+      <span class="sk-tag">Looker / Data Studio</span>
+      <span class="sk-tag">Pixel Tracking</span>
+    </div>
+    <div class="sk-group reveal d4">
+      <h4>Specialized</h4>
+      <span class="sk-tag">AI / SGO (LLM Optimization)</span>
+      <span class="sk-tag">Structured Data Schema</span>
+      <span class="sk-tag">CRM Systems</span>
+      <span class="sk-tag">Data Mining</span>
+      <span class="sk-tag">System Analysis</span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="section-tag reveal">Let's Connect</div>
+  <h2 class="section-title reveal d1">Ready to <em>Grow</em> Together?</h2>
+  <div class="contact-grid">
+    <div class="reveal">
+      <p>Looking for a digital marketing partner who blends technical rigor with creative instinct? I bring a full data-to-campaign pipeline — built on real results in Bali's competitive hospitality market.</p>
+      <div class="c-links">
+        <a href="mailto:arimbawaputra17@gmail.com" class="c-link">
+          <div class="c-icon">✉</div>
+          arimbawaputra17@gmail.com
+        </a>
+        <a href="tel:+6281907317445" class="c-link">
+          <div class="c-icon">☏</div>
+          +62 819 0731 7445
+        </a>
+        <a class="c-link">
+          <div class="c-icon">📍</div>
+          Bangli, Bali — Indonesia
+        </a>
+      </div>
+    </div>
+    <div class="contact-cta reveal d2">
+      <h3>Let's build something <em>remarkable</em></h3>
+      <p>From data strategy to campaign execution — I turn insights into bookings, traffic into revenue, and brands into market leaders.</p>
+      <a href="mailto:arimbawaputra17@gmail.com" class="btn-white">Start a Conversation ↗</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 <span>Arimbawa Putra</span> — Digital Marketing Specialist</p>
+  <p>Bali, <span>Indonesia</span></p>
+</footer>
+
+<script>
+  // Cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx - 4 + 'px';
+    cursor.style.top = my - 4 + 'px';
+  });
+  (function animRing() {
+    rx += (mx - rx) * 0.13; ry += (my - ry) * 0.13;
+    ring.style.left = rx - 15 + 'px'; ring.style.top = ry - 15 + 'px';
+    requestAnimationFrame(animRing);
+  })();
+  document.querySelectorAll('a, button, .tl-item, .exp-card, .pd-card, .process-step').forEach(el => {
+    el.addEventListener('mouseenter', () => ring.classList.add('hovered'));
+    el.addEventListener('mouseleave', () => ring.classList.remove('hovered'));
+  });
+
+  // Intersection Observer
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+  document.querySelectorAll('.reveal, .tl-item, .exp-card, .pd-card, .process-step').forEach(el => obs.observe(el));
+
+  // Timeline interaction
+  const expData = [
+    {
+      company: 'House of Reservations',
+      tag: 'VILLA MANAGEMENT · LUXURY HOSPITALITY · BALI',
+      items: [
+        'Scaled direct bookings by <strong>4× in 2025</strong> through a data-backed integrated strategy spanning SEO architecture, Meta Ads performance campaigns, and UI/UX conversion improvements.',
+        'Built a full <strong>data-to-decision pipeline</strong> — from GA4 event tracking and pixel mapping to weekly performance dashboards and quarterly ROI reports for 250+ villa owners.',
+        'Pioneered <strong>Search Generative Optimization (SGO)</strong> — structuring content and authority citations so properties rank inside Gemini, ChatGPT, and Perplexity results.',
+        'Designed conversion-led <strong>Meta & Google Ads campaigns</strong> using carousel and video storytelling formats, continuously A/B tested against audience segments for maximum ROAS.',
+        'Executed full-cycle <strong>technical SEO audits</strong> — reducing dependency on third-party platforms by capturing high-intent organic traffic through keyword strategy and backlink building.',
+        'Built comprehensive <strong>monthly and quarterly campaign roadmaps</strong> aligned to Bali\'s seasonal tourism demand cycles.'
+      ]
+    },
+    {
+      company: 'Juicebox.id Agency',
+      tag: 'DIGITAL MARKETING AGENCY · SEO FOCUS',
+      items: [
+        'Conducted deep-dive <strong>technical SEO audits</strong> and keyword research strategies to improve domain authority and search rankings for diverse client portfolios.',
+        'Utilized <strong>Google Analytics and Search Console</strong> to identify traffic leaks and deliver actionable CRO recommendations that improved client conversion rates.',
+        'Analyzed <strong>competitor backlink profiles and market trends</strong> to refine content strategy and grow organic visibility across multiple industries.',
+        'Delivered structured <strong>performance reports</strong> that translated SEO data into clear business impact narratives for non-technical stakeholders.'
+      ]
+    },
+    {
+      company: 'PT. LYKIN · ICELAB BALI',
+      tag: 'MULTI-CHANNEL DIGITAL MARKETING',
+      items: [
+        'Executed targeted <strong>lead generation and sales campaigns</strong> across Google, Meta, TikTok, and e-commerce platforms with measurable conversion KPIs.',
+        'Managed <strong>Shopify CMS for international markets</strong> — optimizing product listings, site speed, and user experience to drive global sales growth.',
+        'Directed <strong>content calendars and social engagement strategies</strong> to build brand loyalty and grow community presence across digital channels.',
+        'Developed and executed <strong>multi-platform ad strategies</strong> with consistent creative direction and performance measurement frameworks.'
+      ]
+    },
+    {
+      company: 'Udayana University',
+      tag: 'BACHELOR OF COMPUTER SCIENCE · GPA 3.36',
+      items: [
+        'Graduated with a <strong>Bachelor of Computer Science (S.Kom)</strong> from Udayana University, Bali — 2018 to 2023.',
+        'Relevant coursework: <strong>Internet Marketing, Data Mining, System Analysis & Design, Technopreneurship</strong> — forming the technical foundation for a data-first marketing approach.',
+        'Led event management as <strong>Chairman of the Committee</strong> for Gebagan Youth Music #2 — overseeing budgeting, sponsorship, and promotional strategy that hit 100% audience targets.',
+      ]
+    }
+  ];
+
+  const box = document.getElementById('expDetailBox');
+  document.querySelectorAll('.tl-item').forEach((item, i) => {
+    item.addEventListener('click', () => {
+      document.querySelectorAll('.tl-item').forEach(t => t.classList.remove('active'));
+      item.classList.add('active');
+      const d = expData[i];
+      box.innerHTML = `
+        <div class="edb-company">${d.company}</div>
+        <span class="edb-tag">${d.tag}</span>
+        <ul class="ach-list">${d.items.map(it => `<li>${it}</li>`).join('')}</ul>
+      `;
+    });
+  });
+</script>
+</body>
+</html>
